@@ -1,79 +1,64 @@
-ch=1
-
-while [ $ch -lt 4 ]
+while [[ $ch -lt 4 ]];
 do
-    echo menu
-    echo 1.Prime numbers
-    echo 2.Palindrome numbers
-    echo 3.Palindrome string
-    echo 4.Exit
+echo 1.prime number 
+echo 2.palindrome number
+echo 3.palindrome string
+echo 4.exit
+echo Enter your choice:
+read ch
+case $ch in
+1)
+echo  Enter Number : 
+read n
+for((i=2; i<=$n/2; i++))
+do
+  ans=$(( n%i ))
+  if [ $ans -eq 0 ]
+  then
+    echo $n is not a prime number.
+  fi
+done
+echo $n is a prime number.
+;;
+2)
+echo Enter the number:
+read num
+s=0
+rev=""
 
-    echo "Enter your choice:"
-    read ch
+temp=$num
+while [ $num -gt 0 ]
+do
+	s=$(( $num % 10 ))
+	num=$(( $num / 10 ))
+	rev=$( echo ${rev}${s} )
+done
+if [ $temp -eq $rev ];
+then
+	echo Number is palindrome
+else
+	echo Number is NOT palindrome
+fi
+;;
+3)
+echo Enter a String
+read input
+reverse=""
 
-    case $ch in
-        1)
-            echo "Enter a number:"
-            read num
-
-            d=2
-            x=1
-            while [[ $d -lt $num && $x -ne 0 ]]
-            do
-                x=`expr $num % $d`
-
-                d=`expr $d + 1`
-            done
-
-            if [[ $x -eq 0 ]]
-            then
-                echo "$num is not a prime number"
-            else
-                echo "$num is a prime number"
-            fi
-            ;;
-
-        2)
-            echo "Enter a number"
-            read num
-
-            x=$num
-            reverse=0
-
-            while [ $x -gt 0 ]
-            do
-                digit=`expr $x % 10`
-                reverse=`expr $reverse \* 10 + $digit`
-                x=`expr $x / 10`
-            done
-
-            if [ "$reverse" == "$num" ]
-            then
-                echo "The number is Palindrome"
-            else
-                echo "The number is not Palindrome"
-            fi
-            ;;
-
-        3)
-            echo "Enter a string"
-            read s
-
-            len=${#s}
-
-            for (( i=$len-1; i>=0; i-- ))
-            do
-                reverse="$reverse${s:$i:1}"
-            done
-
-            #echo $s 
-            #echo $reverse
-            if [ "$reverse" == "$s" ]
-            then
-                echo "Palindrome"
-            else
-                echo "Not Palindrome"
-            fi
-            ;;
-    esac
+len=${#input}
+for (( i=$len-1; i>=0; i-- ))
+do 
+	reverse="$reverse${input:$i:1}"
+done
+if [ $input == $reverse ]
+then
+    echo $input is palindrome
+else
+    echo $input is not palindrome
+fi
+;;
+4)
+echo exit
+;;
+esac
 done
