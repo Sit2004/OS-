@@ -1,61 +1,59 @@
-ch=1
-while [ $ch -lt 4 ]
+while [[ $ch -lt 4 ]];
 do
-    echo menu
-    echo 1.Greatest of 3
-    echo 2.Reverse
-    echo 3.Sum of individual digits
-    echo 4.exit
+echo 1.greater of three
+echo 2.reverse of number
+echo 3.sum of indivisual digit
+echo 4.exit
+echo Enter your choice:
+read ch
+case $ch in
+1)
+echo Enter the number 1
+read num1
+echo Enter the number 2
+read num2
+echo Enter the number 3
+read num3
+if [ $num1 -gt $num2 ] && [ $num1 -gt $num3 ]
+then 
+echo $num1
+elif [ $num2 -gt $num1 ] && [ $num2 -gt $num3 ]
+then 
+echo $num2
+else
+echo $num3
+fi
+;;
+2)
+echo enter n
+read n
+num=0
+while [ $n -gt 0 ]
+do
+num=$(expr $num \* 10)
+k=$(expr $n % 10)
+num=$(expr $num + $k)
+n=$(expr $n / 10)
+done
+echo number is $num
+;;
+3)
+echo Enter the number:
+read num
 
-    echo Enter your choice:
-    read ch
+sum=0
 
-    case $ch in
-        1)
-            echo "Enter the three numbers: "
-            read a
-            read b
-            read c
+while [ $num -gt 0 ]
+do
+    mod=$((num % 10))    #It will split each digits
+    sum=$((sum + mod))   #Add each digit to sum
+    num=$((num / 10))    #divide num by 10.
+done
 
-            if [ $a -gt $b -a $a -gt $c ]
-            then
-               echo "$a is greater"
-           elif [ $b -gt $c -a $b -gt $a ]
-           then
-              echo "$b is greater"
-          else
-             echo "$c is greater."
-            fi
-            ;;
-
-        2)
-            echo "Enter the number:"
-            read num
-
-            reverse=0
-
-            while [ $num -gt 0 ]
-            do
-                digit=`expr $num % 10`
-                reverse=`expr $reverse \* 10 + $digit`
-                num=`expr $num / 10`
-            done
-            echo "The number is $reverse"
-            ;;
-
-        3)
-            echo "Enter the number:"
-            read num
-
-            sum=0
-
-            while [ $num -gt 0 ]
-            do
-                digit=`expr $num % 10`
-                sum=`expr $sum + $digit`
-                num=`expr $num / 10`
-            done
-            echo "The sum is $sum"
-            ;;
-    esac
+echo $sum
+;;
+4)
+echo"exit"
+;;
+esac
 done
