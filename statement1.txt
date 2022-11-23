@@ -1,0 +1,39 @@
+echo "Hello World"
+
+ls
+
+echo "Enter file name: "
+read fname
+
+cat $fname
+
+echo "Enter File name You want to create: "
+read newName
+
+touch $newName
+
+echo "Enter the two numbers"
+read a
+read b
+
+if test "$a" -eq "$b"
+then
+    echo "Equal"
+elif test "$a" -gt "$b"
+then
+    echo "$a is greater"
+else
+    echo "$b is greater"
+fi
+
+ch=1
+
+while [ $ch -le 5 ]
+do
+    echo $ch
+    ch=`expr $ch + 1`
+done
+
+grep -i "unix" $fname
+
+sed 's/unix/linux/' $fname
